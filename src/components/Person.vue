@@ -1,32 +1,66 @@
 <template>
     <div class="Person">
-        <h2>Name: {{name}}</h2>
-        <h2>Age: {{age}}</h2>
-        <button @click="ChangeName">ChangeName</button>
-        <button @click="ChangeAge">ChangeAge</button>
-        <button @click="ShowTel">Show Telephone</button>
+        <h2>{{car.brand}} Price: {{car.price}}</h2>
+        <button @click="ChangePrice">ChangePrice</button>
+
+        <hr>
+        <h2>GameList:</h2>
+        <ul>
+            <li v-for="item in games" :key="item.id">{{item.name}}</li>
+        </ul>
+        <button @click="RenameFirstGameName">RenameFirstGameName</button>
+
+        <hr>
+        <h2>obj.a.b.c: {{obj.a.b.c}}</h2>
+        <button @click="ChangeObjectC">ChangeObjectC</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { ref } from 'vue';
+    import { reactive } from 'vue';
 
-    let name = ref("John");
-    let age = ref(30);
-    let tel = "123456789";
+    let car = reactive({brand: 'VW', price: 100});
 
-    function ChangeName()
+    let games = reactive
+    ([
+        {id: '1000', name: 'CSGO'},
+        {id: '1001', name: 'Dota2'},
+        {id: '1002', name: 'LOL'},
+        {id: '1003', name: 'PUBG'},
+        {id: '1004', name: 'APEX'},
+        {id: '1005', name: 'Overwatch'},
+        {id: '1006', name: 'Valorant'},
+    ]);
+
+    let obj = reactive
+    ({
+        a:
+        {
+            b:
+            {
+                c: 666
+            }
+        }
+    });
+
+    function ChangePrice()
     {
-        name.value = "Tom";
+        car.price += 100;
     }
-    function ChangeAge()
+
+    function RenameFirstGameName()
     {
-        age.value += 1;
+        games[0].name = 'CS2';
     }
-    function ShowTel()
+
+    function ChangeObjectC()
     {
-        alert(tel);
+        obj.a.b.c = 777;
     }
+</script>
+
+<script lang="ts">
+    export default { name: 'PersonInfo' }
 </script>
 
 <style scoped>
@@ -41,5 +75,10 @@
     button
     {
         margin-right: 5px;
+    }
+
+    li
+    {
+        font-size: 20px;
     }
 </style>
