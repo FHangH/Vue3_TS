@@ -1,10 +1,7 @@
 // template: 结构(html) script: 逻辑(js/ts) style: 样式
 
 <template>
-    <div class="app">
-        <h1>Hello World</h1>
-        <Person></Person>
-    </div>
+    <Person/>
 </template>
 
 <script lang="ts">
@@ -17,12 +14,5 @@
     }
 </script>
 
-<style>s
-    .app
-    {
-        background-color: #f0f0f0;
-        box-shadow: 0 0 10px;
-        border-radius: 10px;
-        padding: 20px;
-    }
+<style>
 </style>

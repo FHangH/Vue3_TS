@@ -13,27 +13,26 @@
     {
         name: 'PersonInfo',
 
-        data(): any
+        setup()
         {
-            return { name: 'John', age: 30, tel: '123456789' } // 数据属性
-        },
+            let name = "John";
+            let age = 30;
+            let tel = "123456789";
 
-        methods: // 方法属性
-        {
-            ShowTel(): void // 方法定义
+            function ChangeName()
             {
-                alert(this.tel); // 方法体
-            },
+                name = "Tom";
+            }
+            function ChangeAge()
+            {
+                age += 1;
+            }
+            function ShowTel()
+            {
+                alert(tel);
+            }
 
-            ChangeName(): void
-            {
-                this.name = 'Tom';
-            },
-
-            ChangeAge(): void
-            {
-                this.age += 1;
-            },
+            return {name, age, tel, ChangeName, ChangeAge, ShowTel};
         }
     };
 </script>
