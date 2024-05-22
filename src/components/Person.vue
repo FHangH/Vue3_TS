@@ -8,33 +8,23 @@
     </div>
 </template>
 
-<script lang="ts">
-    export default 
+<script lang="ts" setup name="Person">
+    let name = "John";
+    let age = 30;
+    let tel = "123456789";
+
+    function ChangeName()
     {
-        name: 'PersonInfo',
-
-        setup()
-        {
-            let name = "John";
-            let age = 30;
-            let tel = "123456789";
-
-            function ChangeName()
-            {
-                name = "Tom";
-            }
-            function ChangeAge()
-            {
-                age += 1;
-            }
-            function ShowTel()
-            {
-                alert(tel);
-            }
-
-            return {name, age, tel, ChangeName, ChangeAge, ShowTel};
-        }
-    };
+        name = "Tom";
+    }
+    function ChangeAge()
+    {
+        age += 1;
+    }
+    function ShowTel()
+    {
+        alert(tel);
+    }
 </script>
 
 <style scoped>
