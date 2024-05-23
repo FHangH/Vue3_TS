@@ -1,67 +1,41 @@
 <template>
     <div class="Person">
-        <h1>4: watch array type</h1>
-        <h2>Name: {{person.name}}</h2>
-        <h2>Age: {{person.age}}</h2>
-        <h2>Car: {{person.car.c1}} - {{person.car.c2}}</h2>
-        <button @click="ChangeName">ChangeName</button>
-        <button @click="ChangeAge">ChangeAge</button>
-        <button @click="ChangeCar1">ChangeCar1</button>
-        <button @click="ChangeCar2">ChangeCar2</button>
-        <button @click="ChangeAllCar">ChangeAllCar</button>
+        <h1>A >= 60 && B >= 80; POST Server</h1>
+        <h2>A: {{A}}</h2>
+        <h2>A: {{B}}</h2>
+        <button @click="Aa">A + 10: </button>
+        <button @click="Bb">B + 10: </button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { watch, reactive } from 'vue';
+    import { watch, watchEffect, ref } from 'vue';
 
-    let person = reactive
-    ({
-        name: 'Alice',
-        age: 20,
-        car:
-        {
-            c1: 'Audi',
-            c2: 'BMW'
-        }
-    });
+    let A = ref(0);
+    let B = ref(0);
 
-    function ChangeName()
+    function Aa()
     {
-        person.name += '!';
+        A.value += 10;
     }
 
-    function ChangeAge()
+    function Bb()
     {
-        person.age += 1;
+        B.value += 10;
     }
 
-    function ChangeCar1()
-    {
-        person.car.c1 = 'Benz';
-    }
-
-    function ChangeCar2()
-    {
-        person.car.c2 = 'Porsche';
-    }
-
-    function ChangeAllCar()
-    {
-        person.car = {c1: 'Ford', c2: 'Fiat'};
-    }
-
-    // watch([()=>person.name, ()=>person.car.c1], (newValues, oldValues) =>
+    // watch([A, B], (value) => 
     // {
-    //     console.log(`Name changed from ${oldValues[0]} to ${newValues[0]}`);
-    //     console.log(`Car changed from ${oldValues[1]} to ${newValues[1]}`);
+    //     if (value[0] >= 60 && value[1] >= 80) alert("POST Server");
     // });
 
-    watch([()=>person.name, person.car], (newValues, oldValues) =>
+    watchEffect(() =>
     {
-        console.log(`Name changed from ${oldValues[0]} to ${newValues[0]}`);
-        console.log(`Car changed from ${oldValues[1]} to ${newValues[1]}`);
-    }, {deep: true});
+        if (A.value >= 60 && B.value >= 80)
+        {
+            console.log("POST Server"); //POST Server to server.ts
+        } //alert("POST Server");
+    });
 </script>
 
 <style scoped>
