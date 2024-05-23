@@ -1,6 +1,6 @@
 <template>
     <div class="Person">
-        <h1>2: watch ref object type</h1>
+        <h1>3: watch reactive object type</h1>
         <h2>Name: {{person.name}}</h2>
         <h2>Age: {{person.age}}</h2>
         <button @click="ChangeInfo">UpdateInfo</button>
@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { ref, watch } from 'vue';
+    import { ref, watch, reactive } from 'vue';
 
-    let person = ref
+    let person = reactive
     ({
         name: 'Alice',
         age: 20,
@@ -19,13 +19,13 @@
 
     function ChangeInfo()
     {
-        person.value.name += '1';
-        person.value.age += 1;
+        person.name += '1';
+        person.age += 1;
     }
 
     function ChangePerson()
     {
-        person.value = { name: 'Bob', age: 99 };
+        Object.assign(person, { name: 'Bob', age: 99 });
     }
 
     // 第一参数：监视的数据
@@ -40,8 +40,10 @@
         {
             watchStopHandle();
         }
-    }, {deep: true, /*immediate: true*/});
-    // immediate:true 立即监视
+    });
+    // watch reactive 默认开启深度监听。当数据变化时，会执行回调函数。
+    // 回调函数的参数：newValue、oldValue。
+    // 返回值：一个函数，用于停止监听。
 </script>
 
 <style scoped>
