@@ -1,6 +1,6 @@
 <template>
     <div class="Person">
-        <h1>3: watch reactive object type</h1>
+        <h1>4: watch array type</h1>
         <h2>Name: {{person.name}}</h2>
         <h2>Age: {{person.age}}</h2>
         <h2>Car: {{person.car.c1}} - {{person.car.c2}}</h2>
@@ -51,17 +51,16 @@
         person.car = {c1: 'Ford', c2: 'Fiat'};
     }
 
-    watch(() => person.name, (newValue, oldValue) =>
+    // watch([()=>person.name, ()=>person.car.c1], (newValues, oldValues) =>
+    // {
+    //     console.log(`Name changed from ${oldValues[0]} to ${newValues[0]}`);
+    //     console.log(`Car changed from ${oldValues[1]} to ${newValues[1]}`);
+    // });
+
+    watch([()=>person.name, person.car], (newValues, oldValues) =>
     {
-        console.log(`Name changed from ${oldValue} to ${newValue}`);
-    });
-    watch(() => person.age, (newValue, oldValue) =>
-    {
-        console.log(`Age changed from ${oldValue} to ${newValue}`);
-    });
-    watch(() => person.car, (newValue, oldValue) =>
-    {
-        console.log(`Car changed from ${oldValue.c1} - ${oldValue.c2} to ${newValue.c1} - ${newValue.c2}`);
+        console.log(`Name changed from ${oldValues[0]} to ${newValues[0]}`);
+        console.log(`Car changed from ${oldValues[1]} to ${newValues[1]}`);
     }, {deep: true});
 </script>
 
