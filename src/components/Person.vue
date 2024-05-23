@@ -9,19 +9,15 @@
             <li v-for="item in games" :key="item.id">{{item.name}}</li>
         </ul>
         <button @click="RenameFirstGameName">RenameFirstGameName</button>
-
-        <hr>
-        <h2>obj.a.b.c: {{obj.a.b.c}}</h2>
-        <button @click="ChangeObjectC">ChangeObjectC</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { reactive } from 'vue';
+    import { ref } from 'vue';
 
-    let car = reactive({brand: 'VW', price: 100});
+    let car = ref({brand: 'VW', price: 100});
 
-    let games = reactive
+    let games = ref
     ([
         {id: '1000', name: 'CSGO'},
         {id: '1001', name: 'Dota2'},
@@ -32,30 +28,14 @@
         {id: '1006', name: 'Valorant'},
     ]);
 
-    let obj = reactive
-    ({
-        a:
-        {
-            b:
-            {
-                c: 666
-            }
-        }
-    });
-
     function ChangePrice()
     {
-        car.price += 100;
+        car.value.price += 100;
     }
 
     function RenameFirstGameName()
     {
-        games[0].name = 'CS2';
-    }
-
-    function ChangeObjectC()
-    {
-        obj.a.b.c = 777;
+        games.value[0].name = 'CS2';
     }
 </script>
 
