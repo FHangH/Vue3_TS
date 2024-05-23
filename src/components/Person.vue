@@ -1,35 +1,37 @@
 <template>
     <div class="Person">
-        <h2>Name: {{name}}</h2>
-        <h2>Age: {{age}}</h2>
+        First: <input type="text" v-model="firstname"> <br>
+        Last: <input type="text" v-model="lastname"> <br>
+        Full: <span>{{fullname}}</span> <br>
         <button @click="ChangeName">ChangeName</button>
-        <button @click="ChangeAge">ChangeAge</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { reactive, ref, toRefs} from 'vue';
+    import { ref, computed } from 'vue';
 
-    let person = reactive
+    let firstname = ref('zhang');
+    let lastname = ref('san');
+    let fullname = computed
     ({
-        name: '张三', age: 30
-    });
+        get()
+        {
+            return  firstname.value.slice(0, 1).toUpperCase() + firstname.value.slice(1) + ' ' + 
+                    lastname.value.slice(0, 1).toUpperCase() + lastname.value.slice(1);
+        },
 
-    let {name, age} = toRefs(person);
+        set(val)
+        {
+            let names = val.split('-');
+            firstname.value = names[0];
+            lastname.value = names[1];
+        }
+    });
 
     function ChangeName()
     {
-        name.value = '李四';
+        fullname.value = 'li-si';
     }
-
-    function ChangeAge()
-    {
-        age.value = 40;
-    }
-</script>
-
-<script lang="ts">
-    export default { name: 'PersonInfo' }
 </script>
 
 <style scoped>
