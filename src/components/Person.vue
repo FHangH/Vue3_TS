@@ -1,37 +1,26 @@
 <template>
     <div class="Person">
-        First: <input type="text" v-model="firstname"> <br>
-        Last: <input type="text" v-model="lastname"> <br>
-        Full: <span>{{fullname}}</span> <br>
-        <button @click="ChangeName">ChangeName</button>
+        <h1>1: watch ref base data type</h1>
+        <h2>Current Sum: {{sum}}</h2>
+        <button @click="ChangeSum">UpdateSum</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { ref, computed } from 'vue';
+    import { ref, watch } from 'vue';
 
-    let firstname = ref('zhang');
-    let lastname = ref('san');
-    let fullname = computed
-    ({
-        get()
-        {
-            return  firstname.value.slice(0, 1).toUpperCase() + firstname.value.slice(1) + ' ' + 
-                    lastname.value.slice(0, 1).toUpperCase() + lastname.value.slice(1);
-        },
+    let sum  = ref(0);
 
-        set(val)
+    function ChangeSum() { sum.value += 1; }
+
+    const watchHandle = watch(sum, (newValue, oldValue) => 
+    { 
+        console.log(`Sum changed from ${oldValue} to ${newValue}`);
+        if (newValue >= 5)
         {
-            let names = val.split('-');
-            firstname.value = names[0];
-            lastname.value = names[1];
+            watchHandle();
         }
     });
-
-    function ChangeName()
-    {
-        fullname.value = 'li-si';
-    }
 </script>
 
 <style scoped>
