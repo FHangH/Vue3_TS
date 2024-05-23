@@ -3,47 +3,66 @@
         <h1>3: watch reactive object type</h1>
         <h2>Name: {{person.name}}</h2>
         <h2>Age: {{person.age}}</h2>
-        <button @click="ChangeInfo">UpdateInfo</button>
-        <button @click="ChangePerson">ChangePerson</button>
+        <h2>Car: {{person.car.c1}} - {{person.car.c2}}</h2>
+        <button @click="ChangeName">ChangeName</button>
+        <button @click="ChangeAge">ChangeAge</button>
+        <button @click="ChangeCar1">ChangeCar1</button>
+        <button @click="ChangeCar2">ChangeCar2</button>
+        <button @click="ChangeAllCar">ChangeAllCar</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { ref, watch, reactive } from 'vue';
+    import { watch, reactive } from 'vue';
 
     let person = reactive
     ({
         name: 'Alice',
         age: 20,
+        car:
+        {
+            c1: 'Audi',
+            c2: 'BMW'
+        }
     });
 
-    function ChangeInfo()
+    function ChangeName()
     {
-        person.name += '1';
+        person.name += '!';
+    }
+
+    function ChangeAge()
+    {
         person.age += 1;
     }
 
-    function ChangePerson()
+    function ChangeCar1()
     {
-        Object.assign(person, { name: 'Bob', age: 99 });
+        person.car.c1 = 'Benz';
     }
 
-    // 第一参数：监视的数据
-    // 第二参数：数据变化时执行的回调函数，该函数接收三个参数：newValue、oldValue、onInvalidate。
-    // 第三参数：配置选项，可选。
-    const watchStopHandle = watch(person, (newValue, oldValue) =>
+    function ChangeCar2()
     {
-        console.log(`The new name is ${newValue.name}`);
-        console.log(`The new age is ${newValue.age}`);
+        person.car.c2 = 'Porsche';
+    }
 
-        if (newValue.age >= 101)
-        {
-            watchStopHandle();
-        }
+    function ChangeAllCar()
+    {
+        person.car = {c1: 'Ford', c2: 'Fiat'};
+    }
+
+    watch(() => person.name, (newValue, oldValue) =>
+    {
+        console.log(`Name changed from ${oldValue} to ${newValue}`);
     });
-    // watch reactive 默认开启深度监听。当数据变化时，会执行回调函数。
-    // 回调函数的参数：newValue、oldValue。
-    // 返回值：一个函数，用于停止监听。
+    watch(() => person.age, (newValue, oldValue) =>
+    {
+        console.log(`Age changed from ${oldValue} to ${newValue}`);
+    });
+    watch(() => person.car, (newValue, oldValue) =>
+    {
+        console.log(`Car changed from ${oldValue.c1} - ${oldValue.c2} to ${newValue.c1} - ${newValue.c2}`);
+    }, {deep: true});
 </script>
 
 <style scoped>
