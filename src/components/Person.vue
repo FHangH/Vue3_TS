@@ -1,41 +1,23 @@
 <template>
     <div class="Person">
-        <h1>A >= 60 && B >= 80; POST Server</h1>
-        <h2>A: {{A}}</h2>
-        <h2>A: {{B}}</h2>
-        <button @click="Aa">A + 10: </button>
-        <button @click="Bb">B + 10: </button>
+       <h1>China</h1>
+       <h2 ref="title2">Hefei</h2>
+       <h3>ZhongAn</h3>
+       <button @click="PrintH2">Print H2</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { watch, watchEffect, ref } from 'vue';
+    import {ref, defineExpose} from 'vue';
 
-    let A = ref(0);
-    let B = ref(0);
+    let title2 = ref();
 
-    function Aa()
+    defineExpose({title2});
+
+    function PrintH2() 
     {
-        A.value += 10;
+        console.log(title2.value.innerHTML);
     }
-
-    function Bb()
-    {
-        B.value += 10;
-    }
-
-    // watch([A, B], (value) => 
-    // {
-    //     if (value[0] >= 60 && value[1] >= 80) alert("POST Server");
-    // });
-
-    watchEffect(() =>
-    {
-        if (A.value >= 60 && B.value >= 80)
-        {
-            console.log("POST Server"); //POST Server to server.ts
-        } //alert("POST Server");
-    });
 </script>
 
 <style scoped>
