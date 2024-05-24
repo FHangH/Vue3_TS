@@ -1,23 +1,17 @@
 <template>
     <div class="Person">
-       <h1>China</h1>
-       <h2 ref="title2">Hefei</h2>
-       <h3>ZhongAn</h3>
-       <button @click="PrintH2">Print H2</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import {ref, defineExpose} from 'vue';
+    import { type IPerson, type PersonList } from '@/types';
 
-    let title2 = ref();
-
-    defineExpose({title2});
-
-    function PrintH2() 
-    {
-        console.log(title2.value.innerHTML);
-    }
+    // let person: IPerson = { id: '123456', name: '张三', age: 30}
+    let personList: PersonList = 
+        [
+            {id: '123456', name: '张三', age: 30},
+            {id: '000000', name: 'lisi', age: 10}
+        ];
 </script>
 
 <style scoped>
