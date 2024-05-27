@@ -1,30 +1,62 @@
 <template>
     <div class="Person">
-        <ul>
-            <li v-for="item in list" :key="item.id">
-                {{item.name}} - {{item.age}}
-            </li>
-        </ul>
+        <h2>Sum: {{sum}}</h2>
+        <button @click="Add">Sum + 1</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { defineProps, withDefaults } from 'vue';
-    import { type PersonList } from '@/types';
+    import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted }  from 'vue';
 
-    // 定义组件的属性类型和结构，并使用defineProps进行声明。
-    // defineProps(['list']);
-    
-    // 使用类型断言来指定list的类型。
-    // defineProps<{list: PersonList}>();
+    let sum = ref(0);
 
-    withDefaults
-    (
-        defineProps<{list?: PersonList}>(), 
-        {
-            list: () => [{ id: '123546', name: '张三', age: 18}]
-        }
-    );
+    function Add()
+    {
+        sum.value += 1;
+    }
+
+    // 创建
+    console.log("Person创建 => Setup");
+
+    // 挂载前
+    onBeforeMount(() => 
+    { 
+        console.log("Person挂载前 => onBeforeMount"); 
+    });
+
+    // 挂载后
+    onMounted(() => 
+    { 
+        console.log("Person挂载后 => onMounted"); 
+    });
+
+    // 更新前
+    onBeforeUpdate(() => 
+    { 
+        console.log("Person更新 => onBeforeUpdate"); 
+    });
+
+    // 更新后
+    onUpdated(() => 
+    { 
+        console.log("Person更新后 => onUpdated"); 
+    });
+
+    // 卸载前
+    onBeforeUnmount(() => 
+    { 
+        console.log("Person卸载前 => onBeforeUnmount"); 
+    });
+
+    // 卸载后
+    onUnmounted(() => 
+    { 
+        console.log("Person卸载后 => onUnmounted"); 
+    });
+</script>
+
+<script lang="ts">
+    export default { name: 'PersonInfo' }
 </script>
 
 <style scoped>
