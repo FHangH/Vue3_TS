@@ -2,7 +2,7 @@
 
 <template>
     <div class="app">
-        <h2>Vue3 Router</h2>
+        <Header></Header>
 
         <div class="nav">
             <RouterLink to="/aaa" active-class="active">AAA</RouterLink>
@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts" setup name="App">
+  import Header from './components/Header.vue'
   import { RouterView, RouterLink } from 'vue-router';
 </script>
 
@@ -35,12 +36,6 @@
   margin: 0 auto;
   padding: 20px;
   max-width: 800px;
-}
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 30px;
-  color: #4CAF50;
 }
 
 .nav {

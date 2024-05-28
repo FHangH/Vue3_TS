@@ -1,6 +1,6 @@
 <template>
     <div class="aaa">
-        <iframe src="https://www.baidu.com" frameborder="0" width="100%" height="100%"></iframe>
+        <h1>AAA Page</h1>
     </div>
 </template>
 

@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import AAA from '@/components/AAA.vue';
-import BBB from '@/components/BBB.vue';
-import CCC from '@/components/CCC.vue';
+import AAA from '@/pages/AAA.vue';
+import BBB from '@/pages/BBB.vue';
+import CCC from '@/pages/CCC.vue';
 
 const router = createRouter
 (
