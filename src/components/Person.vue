@@ -1,58 +1,20 @@
 <template>
     <div class="Person">
-        <h2>Sum: {{sum}}</h2>
+        <h2>Sum: {{sum}} -- {{bigSum}}</h2>
         <button @click="Add">Sum + 1</button>
+        <hr>
+        <img v-for="(dog, index) in dogList" :src="dog" :key="index">
+        <br>
+        <button @click="ChangeDog">ChangeDog</button>
     </div>
 </template>
 
 <script lang="ts" setup name="PersonInfo">
-    import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted }  from 'vue';
+    import useSum from '@/hooks/useSum';
+    import useDog from '@/hooks/useDog';
 
-    let sum = ref(0);
-
-    function Add()
-    {
-        sum.value += 1;
-    }
-
-    // 创建
-    console.log("Person创建 => Setup");
-
-    // 挂载前
-    onBeforeMount(() => 
-    { 
-        console.log("Person挂载前 => onBeforeMount"); 
-    });
-
-    // 挂载后
-    onMounted(() => 
-    { 
-        console.log("Person挂载后 => onMounted"); 
-    });
-
-    // 更新前
-    onBeforeUpdate(() => 
-    { 
-        console.log("Person更新 => onBeforeUpdate"); 
-    });
-
-    // 更新后
-    onUpdated(() => 
-    { 
-        console.log("Person更新后 => onUpdated"); 
-    });
-
-    // 卸载前
-    onBeforeUnmount(() => 
-    { 
-        console.log("Person卸载前 => onBeforeUnmount"); 
-    });
-
-    // 卸载后
-    onUnmounted(() => 
-    { 
-        console.log("Person卸载后 => onUnmounted"); 
-    });
+    const { sum, bigSum, Add } = useSum();
+    const { dogList, ChangeDog } = useDog();
 </script>
 
 <script lang="ts">
@@ -76,5 +38,12 @@
     li
     {
         font-size: 20px;
+    }
+
+    img
+    {
+        width: auto;
+        height: 100px;
+        margin-right: 10px;
     }
 </style>
