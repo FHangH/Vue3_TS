@@ -7,7 +7,7 @@
         <div class="nav">
             <RouterLink to="/aaa" active-class="active">AAA</RouterLink>
             <RouterLink to="/bbb" active-class="active">BBB</RouterLink>
-            <RouterLink to="/ccc" active-class="active">CCC</RouterLink>
+            <RouterLink :to="{path:'/ccc'}" active-class="active">CCC</RouterLink>
         </div>
 
         <div class="content">
