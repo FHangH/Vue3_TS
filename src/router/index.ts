@@ -13,14 +13,17 @@ const router = createRouter
         routes:
         [
             {
+                name: 'AAA', // 路由名称，可选，但建议设置，以便在路由跳转时使用。
                 path: '/aaa',
                 component: AAA
             },
             {
+                name: 'BBB', // 路由名称，可选，但建议设置，以便在路由跳转时使用。
                 path: '/bbb',
                 component: BBB
             },
             {
+                name: 'CCC', // 路由名称，可选，但建议设置，以便在路由跳转时使用。
                 path: '/ccc',
                 component: CCC
             }

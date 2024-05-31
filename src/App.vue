@@ -5,8 +5,8 @@
         <Header></Header>
 
         <div class="nav">
-            <RouterLink to="/aaa" active-class="active">AAA</RouterLink>
-            <RouterLink to="/bbb" active-class="active">BBB</RouterLink>
+            <RouterLink :to="{name:'AAA'}" active-class="active">AAA</RouterLink>
+            <RouterLink :to="{name:'BBB'}" active-class="active">BBB</RouterLink>
             <RouterLink :to="{path:'/ccc'}" active-class="active">CCC</RouterLink>
         </div>
 
